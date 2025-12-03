@@ -1,0 +1,30 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>FASTLINK ICT BLOG</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		{% tailwind_css %}
+		<link rel="stylesheet" href="{% static 'css/blog.css' %}" />
+	</head>
+
+	<body class="font-jaka">
+		{% comment %}
+		<header>
+			<nav class="bg-blue-600 p-4 text-white">
+				<div class="container mx-auto flex justify-between">
+					<a href="{% url 'index' %}" class="font-bold">My Blog</a>
+					<div class="flex gap-3 px-16">
+						<a href="{% url 'index' %}" class="mr-4 hover:underline">Home</a>
+						<a href="{% url 'create_employee' %}" class="hover:underline">Contact</a>
+						<a href="{% url 'employees_list' %}" class="hover:underline">List</a>
+					</div>
+				</div>
+			</nav>
+		</header>
+		{% endcomment %}
+		<div class="div">{% block content %} {% endblock %}</div>
+	</body>
+</html>

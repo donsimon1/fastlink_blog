@@ -1,0 +1,177 @@
+
+{% extends "base.html" %} 
+{% load static %}
+{% block content %}
+
+<div class="container mx-auto px-8 md:px-12 font-jaka">
+	<!-- Header -->
+	<header class="py-3">
+		<div class="flex flex-nowrap justify-between items-center">
+			<div class="pt-1">
+				<a class="blog-header-logo text-gray-900 no-underline" href="/"
+					>FastLink Blog</a
+				>
+			</div>
+			<div class="flex justify-end items-center gap-2">
+				<a
+					class="px-4 py-2 bg-blue-500 text-white text-sm rounded hover:bg-blue-600"
+					href="#"
+					>Login</a
+				>
+				<a
+					class="px-4 py-2 border border-gray-400 text-gray-700 text-sm rounded hover:bg-gray-100"
+					href="#"
+					>Register</a
+				>
+			</div>
+		</div>
+	</header>
+
+	<!-- Navigation -->
+	<div class="py-1 mb-2">
+		<nav class="flex justify-between overflow-x-auto">
+			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
+				>World</a
+			>
+			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
+				>U.S.</a
+			>
+			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
+				>Technology</a
+			>
+			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
+				>Design</a
+			>
+			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
+				>Culture</a
+			>
+			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
+				>Business</a
+			>
+			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
+				>Politics</a
+			>
+			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
+				>Opinion</a
+			>
+			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
+				>Science</a
+			>
+			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
+				>Health</a
+			>
+			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
+				>Style</a
+			>
+			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
+				>Travel</a
+			>
+		</nav>
+	</div>
+
+	<!-- Featured Post -->
+	<div
+		class="px-8 py-16  md:p-12 text-white rounded bg-gray-700 mb-4"
+		style="
+			background-image: url({% static 'images/cricket.jpg' %});
+			background-blend-mode: overlay;
+			background-size: cover;
+		">
+		<div class="md:w-2/3 px-0">
+			<h1 class="text-4xl font-serif italic mb-3">
+				Title of a longer featured blog post
+			</h1>
+			<p class="text-lg my-3">
+				Multiple lines of text that form the lede, informing new readers quickly and
+				efficiently about what's most interesting in this post's contents.
+			</p>
+			<p class="text-lg mb-0">
+				<a href="#" class="text-white font-bold hover:underline"
+					>Continue reading...</a
+				>
+			</p>
+		</div>
+	</div>
+
+	<!-- Two Column Posts -->
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+		<div class="bg-white p-4 rounded">
+			<h3 class="text-2xl font-bold mb-2">Post Title</h3>
+			<small class="text-gray-600 mb-1">Nov 11 | Author</small>
+			<p class="mt-2 text-gray-700">
+				Some quick example text to build on the card title and make up the bulk of
+				the card's content.
+			</p>
+		</div>
+		<div class="bg-white p-4 rounded">
+			<h3 class="text-2xl font-bold mb-2">Post Title</h3>
+			<small class="text-gray-600 mb-1">Nov 11 | Author</small>
+			<p class="mt-2 text-gray-700">
+				Some quick example text to build on the card title and make up the bulk of
+				the card's content.
+			</p>
+		</div>
+	</div>
+
+	<!-- Main Content -->
+	<main class="container mx-auto p-0">
+		<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+			<!-- Blog Main -->
+			<div class="md:col-span-8">
+				<article class="blog-post">
+					<h2 class="text-3xl font-bold mb-2">Sample blog post</h2>
+					<p class="text-gray-600 mb-4">
+						January 1, 2014 by
+						<a href="#" class="text-blue-600 hover:underline">Mark</a>
+					</p>
+
+					<p class="mb-4">
+						This blog post shows a few different types of content that's supported and
+						styled with Bootstrap. Basic typography, images, and code are all
+						supported.
+					</p>
+
+					<p class="mb-4">
+						Cum sociis natoque penatibus et magnis
+						<a href="#" class="text-blue-600 hover:underline">dis parturient montes</a
+						>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem
+						lacinia quam venenatis vestibulum. Sed posuere consectetur est at
+						lobortis. Cras mattis consectetur purus sit amet fermentum.
+					</p>
+				</article>
+			</div>
+
+			<!-- Sidebar -->
+			<aside class="md:col-span-4">
+				<div class="p-4 mb-4 bg-gray-100 rounded">
+					<h4 class="font-serif italic text-xl mb-3">About</h4>
+					<p class="mb-0">
+						Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis
+						consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed
+						consectetur.
+					</p>
+				</div>
+
+				<div class="p-4">
+					<h4 class="font-serif italic text-xl mb-3">Follow Us</h4>
+					<ul class="list-none pl-0">
+						<li class="mb-2">
+							<a href="#" class="text-blue-600 hover:underline">GitHub</a>
+						</li>
+						<li class="mb-2">
+							<a href="#" class="text-blue-600 hover:underline">LinkedIn</a>
+						</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</main>
+</div>
+<!-- Footer -->
+<footer class="bg-gray-100 text-center py-6 mt-8">
+	<p class="text-gray-600">
+		FASTLINK ICT BLOG &copy; 2025. Developed by
+		<a href="#" class="text-blue-600 hover:underline">Simon AI</a>
+	</p>
+</footer>
+{% endblock %}

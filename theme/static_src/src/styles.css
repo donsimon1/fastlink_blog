@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@custom-variant hover (&:hover);
+
+
+/**
+  * A catch-all path to Django template files, JavaScript, and Python files
+  * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
+  *
+  * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
+  * the scope of this path.
+  */
+
+/* @plugin "daisyui"; */
+/* install daisyui for this to work */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap");
+
+@theme {
+	/* Break Points */
+	/* --breakpoint-* */
+	/* --breakpoint-sm: px;
+	--breakpoint-md: px;
+	--breakpoint-lg: px; */
+
+	/* colours */
+	--color-mint-500: oklch(0.72 0.11 178);
+	--color-primary-green: #02611A;
+	--color-primary-gray: #dddede;
+	--color-secondary-gray: #3e4145;
+	--color-custom-green-600: #3b8336;
+	--color-custom-yellow-200: #fff7c2;
+	--color-custom-red-300: #ab6400;
+	--color-custom-red-300: #dc3e42;
+	--color-custom-black: #000000;
+	--color-custom-light-green: #effef2;
+	--color-custom-gray-900: #101828;
+	--color-custom-gray-600: #475467;
+
+	/* fonts */
+	--font-poppins: Poppins, sans-serif;
+	--font-jaka: Plus Jakarta, sans-serif;
+	--font-roboto: Roboto, sans-serif;
+	--font-sora: Sora, sans-serif;
+	--font-manrope: Manrope, sans-serif;
+	--font-inter: inter, sans-serif;
+	--font-gilroy-regular: Gilroy-Regular, sans-serif;
+	--font-gilroy-bold: Gilroy-Bold, sans-serif;
+	--font-gilroy-heavy: Gilroy-Heavy, sans-serif;
+	--font-gilroy-light: Gilroy-Light, sans-serif;
+	--font-gilroy-medium: Gilroy-Medium, sans-serif;
+}
+
+
+@source "../../../**/*.{html,py,js}";
