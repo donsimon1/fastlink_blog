@@ -1,11 +1,5 @@
-
-{% extends "base.html" %} 
-{% load static %}
-{% block content %}
-
-<div class="container mx-auto px-8 md:px-12 font-jaka">
-	<!-- Header -->
-	<header class="py-3">
+{% extends "base.html" %} {% load static %} {% block content %}
+<header class="py-2 border-b-3 border-blue-600 mb-8 rounded-lg px-8">
 		<div class="flex flex-nowrap justify-between items-center">
 			<div class="pt-1">
 				<a class="blog-header-logo text-gray-900 no-underline" href="/"
@@ -27,118 +21,80 @@
 		</div>
 	</header>
 
+
+<div class="container mx-auto px-8 md:px-12 font-jaka">
+	<!-- Header -->
+	
 	<!-- Navigation -->
-	<div class="py-1 mb-2">
+	<div class="py-1 mb-16"> 
 		<nav class="flex justify-between overflow-x-auto">
-			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
-				>World</a
-			>
-			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
-				>U.S.</a
-			>
-			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
-				>Technology</a
-			>
-			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
-				>Design</a
-			>
-			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
-				>Culture</a
-			>
-			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
-				>Business</a
-			>
-			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
-				>Politics</a
-			>
-			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
-				>Opinion</a
-			>
-			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
-				>Science</a
-			>
-			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
-				>Health</a
-			>
-			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
-				>Style</a
-			>
-			<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
-				>Travel</a
-			>
+			{% for category in categories %}
+			<h4>
+				<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="#"
+					>{{ category }}
+				</a>
+			</h4>
+			{% endfor %}
 		</nav>
 	</div>
 
 	<!-- Featured Post -->
+	{% for post in featured_posts %} {% if forloop.last %}
 	<div
-		class="px-8 py-16  md:p-12 text-white rounded bg-gray-700 mb-4"
+		class="px-8 py-16 md:p-12 text-white rounded bg-gray-700 mb-4 min-h-[70vh]"
 		style="
-			background-image: url({% static 'images/cricket.jpg' %});
-			background-blend-mode: overlay;
-			background-size: cover;
-		">
+    background-image: url('{{ post.featured_image.url }}');
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: top;
+  ">
 		<div class="md:w-2/3 px-0">
-			<h1 class="text-4xl font-serif italic mb-3">
-				Title of a longer featured blog post
-			</h1>
-			<p class="text-lg my-3">
-				Multiple lines of text that form the lede, informing new readers quickly and
-				efficiently about what's most interesting in this post's contents.
-			</p>
-			<p class="text-lg mb-0">
-				<a href="#" class="text-white font-bold hover:underline"
+			<h1 class="text-4xl font-serif italic mb-3">{{ post.title }}</h1>
+			<p class="text-lg my-3">{{ post.blog_body|truncatewords:80 }}</p>
+			<p class="text-lg mb-0 mt-5">
+				<a
+					href="{% url 'post_by_category' category_id=post.category.id %}"
+					class="text-white font-bold hover:underline border px-4 py-2 rounded-lg border-white"
 					>Continue reading...</a
 				>
 			</p>
 		</div>
 	</div>
+	{% endif %} {% endfor %}
 
-	<!-- Two Column Posts -->
+	<!-- Featured Posts -->
+	<h3 class="text-4xl text-blue-700 font-bold mb-4 mt-16">Featured Posts</h3>
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-		<div class="bg-white p-4 rounded">
-			<h3 class="text-2xl font-bold mb-2">Post Title</h3>
-			<small class="text-gray-600 mb-1">Nov 11 | Author</small>
-			<p class="mt-2 text-gray-700">
-				Some quick example text to build on the card title and make up the bulk of
-				the card's content.
-			</p>
+		{% for post in featured_posts %} {% if not forloop.first %}
+		<div class="bg-white p-8 rounded">
+			<h3 class="text-2xl font-bold mb-2 text-blue-500 font-sora">
+				{{ post.title }}
+			</h3>
+			<small class="text-gray-600 mb-1"
+				>{{ post.updated_at| timesince }} | {{ post.author | capfirst }}</small
+			>
+			<p class="mt-2 text-gray-700">{{ post.blog_body|truncatechars:80 }}</p>
 		</div>
-		<div class="bg-white p-4 rounded">
-			<h3 class="text-2xl font-bold mb-2">Post Title</h3>
-			<small class="text-gray-600 mb-1">Nov 11 | Author</small>
-			<p class="mt-2 text-gray-700">
-				Some quick example text to build on the card title and make up the bulk of
-				the card's content.
-			</p>
-		</div>
+		{% endif %} {% endfor %}
 	</div>
 
 	<!-- Main Content -->
+	<h3 class="text-3xl text-blue-700 font-bold mb-4 mt-16">Recent Articles</h3>
 	<main class="container mx-auto p-0">
 		<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
 			<!-- Blog Main -->
 			<div class="md:col-span-8">
+				{% for post in posts %}
 				<article class="blog-post">
-					<h2 class="text-3xl font-bold mb-2">Sample blog post</h2>
+					<h2 class="text-3xl font-bold mb-2">{{ post.title }}</h2>
 					<p class="text-gray-600 mb-4">
-						January 1, 2014 by
-						<a href="#" class="text-blue-600 hover:underline">Mark</a>
+						{{ post.updated_at| timesince }} |
+						<a href="#" class="text-blue-600 hover:underline">{{ post.author }}</a>
 					</p>
 
-					<p class="mb-4">
-						This blog post shows a few different types of content that's supported and
-						styled with Bootstrap. Basic typography, images, and code are all
-						supported.
-					</p>
-
-					<p class="mb-4">
-						Cum sociis natoque penatibus et magnis
-						<a href="#" class="text-blue-600 hover:underline">dis parturient montes</a
-						>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem
-						lacinia quam venenatis vestibulum. Sed posuere consectetur est at
-						lobortis. Cras mattis consectetur purus sit amet fermentum.
-					</p>
+					<p class="mb-4 text-justify">{{ post.blog_body|truncatewords:80 }}</p>
 				</article>
+				{% endfor %}
 			</div>
 
 			<!-- Sidebar -->
@@ -165,13 +121,14 @@
 				</div>
 			</aside>
 		</div>
+
+		<!-- Footer -->
+		<footer class="bg-gray-100 text-center py-6 mt-8">
+			<p class="text-gray-600">
+				FASTLINK ICT BLOG &copy; 2025. Developed by
+				<a href="#" class="text-blue-600 hover:underline">Simon AI</a>
+			</p>
+		</footer>
+		{% endblock %}
 	</main>
 </div>
-<!-- Footer -->
-<footer class="bg-gray-100 text-center py-6 mt-8">
-	<p class="text-gray-600">
-		FASTLINK ICT BLOG &copy; 2025. Developed by
-		<a href="#" class="text-blue-600 hover:underline">Simon AI</a>
-	</p>
-</footer>
-{% endblock %}
