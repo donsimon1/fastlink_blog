@@ -1,25 +1,25 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends 'base.html' %}
 
+{% block content %}
 <div class="container mx-auto px-8 md:px-12 font-jaka">
 	<!-- Featured Posts -->
 	<h3 class="text-4xl text-blue-700 font-bold mb-4 mt-16">
-		Category - {{category.category_name}}
+		Search Term - {{keyword}}
 	</h3>
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-		{% if posts %} {% for post in posts %}
+		{% if blogs %} {% for i in blogs %}
 		<div class="bg-white p-8 rounded">
 			<h3 class="text-2xl font-bold mb-2 text-blue-500 font-sora">
-				<a href="{% url 'blogs' post.slug %}">{{ post.title }}</a>
+				<a href="{% url 'blogs' i.slug %}">{{ i.title }}</a>
 			</h3>
 			<small class="text-gray-600 mb-1"
-				>{{ post.updated_at| timesince }} | {{ post.author | capfirst }}</small
+				>{{ i.updated_at| timesince }} | {{ i.author | capfirst }}</small
 			>
-			<p class="mt-2 text-gray-700">{{ post.blog_body|truncatechars:80 }}</p>
+			<p class="mt-2 text-gray-700">{{ i.blog_body|truncatechars:80 }}</p>
 		</div>
 		{% endfor %} {% else %}
 		<p>No Post Found</p>
 		{% endif %}
 	</div>
-
-	{% endblock %}
 </div>
+{% endblock %}

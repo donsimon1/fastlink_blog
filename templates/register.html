@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class="text-center text-3xl font-bold">Register</h3>
+<form action="" method="POST">
+  {% csrf_token %}
+  {{ form }}
+  <button class="px-4 py-2 bg-blue-600 text-white font-bold" type="submit">Submit</button>
+</form> 
+
+{% endblock %}

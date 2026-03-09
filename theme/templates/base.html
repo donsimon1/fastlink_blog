@@ -11,20 +11,73 @@
 	</head>
 
 	<body class="font-jaka text-base bg-gray-100">
-		{% comment %}
-		<header>
-			<nav class="bg-blue-600 p-4 text-white">
-				<div class="container mx-auto flex justify-between">
-					<a href="{% url 'index' %}" class="font-bold">My Blog</a>
-					<div class="flex gap-3 px-16">
-						<a href="{% url 'index' %}" class="mr-4 hover:underline">Home</a>
-						<a href="{% url 'create_employee' %}" class="hover:underline">Contact</a>
-						<a href="{% url 'employees_list' %}" class="hover:underline">List</a>
-					</div>
-				</div>
-			</nav>
-		</header>
-		{% endcomment %}
-		<div class="div">{% block content %} {% endblock %}</div>
+		<header class="py-2 border-b-2 border-blue-600 mb-8 rounded-lg px-8">
+      <div class="flex flex-nowrap justify-between items-center">
+        <div class="pt-1">
+          <a class="blog-header-logo no-underline font-bold text-blue-700" href="/"
+            >FastLink Blog</a
+          >
+        </div>
+        <!-- Search Section -->
+        <div class="bg-white rounded-lg">
+          
+          <form action="blog_main" method="GET" class="flex">
+            <input
+              type="text"
+              name="keyword"
+              value="{{ keyword }}"
+              placeholder="Enter search term ..."
+              class="flex-1 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <button
+              class="bg-blue-600 text-white text-sm px-6 py-2 rounded hover:bg-blue-700 transition">
+              Go!
+            </button>
+          </form>
+        </div>
+        <div class="flex justify-end items-center gap-2">
+          <a
+            class="px-4 py-2 bg-blue-500 text-white text-sm rounded hover:bg-blue-600"
+            href="{% url 'register' %}"
+            >Login</a
+          >
+          <a
+            class="px-4 py-2 border border-gray-400 text-gray-700 text-sm rounded hover:bg-gray-100"
+            href="{% url 'register' %}"
+            >Register</a
+          >
+        </div>
+      </div>
+	</header>
+
+
+<div class="container mx-auto px-8 md:px-12 font-jaka">
+	<!-- Header -->
+	
+	<!-- Navigation -->
+	<div class="py-1 mb-16"> 
+		<nav class="flex justify-between overflow-x-auto">
+			{% for category in categories %}
+			<h4>
+				<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="{% url 'post_by_category' category.id %}"
+					>{{ category.category_name }}
+				</a>
+			</h4> 
+			{% endfor %}
+		</nav>
+	</div>
+
+		<div>
+      
+      {% block content %} 
+      {% endblock %}
+    </div>
+
+    <!-- Footer -->
+		<footer class="bg-gray-200 text-center py-6 mt-8">
+			<p class="text-gray-600">
+				<span class="text-blue-600 font-bold">FASTLINK ICT BLOG</span> &copy; 2025. Developed by
+				<a href="#" class="text-blue-600 font-bold hover:underline">SIMON AI</a>
+			</p>
+		</footer>
 	</body>
 </html>

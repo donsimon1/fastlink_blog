@@ -26,8 +26,8 @@ STATUS_CHOICES = (
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="posts")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="authors")
     featured_image = models.ImageField(
         upload_to='uploads/%Y/%m/%d/', blank=True, null=True)
     short_description = models.CharField(max_length=500)
