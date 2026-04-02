@@ -1,0 +1,113 @@
+<!-- Mobile Sidebar Overlay -->
+<div
+	id="mobileSidebarOverlay"
+	class="fixed inset-0 bg-black bg-opacity-40 z-30 hidden md:hidden"
+	aria-hidden="true"></div>
+
+<!-- Sidebar (desktop) -->
+<aside
+	id="desktopSidebar"
+	class="hidden md:flex md:w-64 bg-linear-to-b from-gray-900 to-gray-800 text-white flex-col shadow-xl"
+	aria-label="Sidebar">
+	<!-- Logo/Brand Section -->
+	<div class="p-6 border-b border-gray-700">
+		<h1 class="text-xl font-bold text-white">FASTLINK ICT</h1>
+		<p class="text-sm text-gray-400 mt-1">Blog Management</p>
+	</div>
+
+	<!-- Navigation -->
+	<nav class="flex-1 px-4 py-6 space-y-1">
+		<a
+			href="{% url 'dashboard' %}"
+			class="flex items-center py-3 px-4 rounded-lg bg-linear-to-r text-white font-semibold shadow-lg transform transition-all hover:scale-105 {% if '/dashboard/' == request.path %} bg-blue-600 {% endif %}">
+			<svg
+				class="w-5 h-5 mr-3"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+				aria-hidden="true">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+			</svg>
+			Dashboard
+		</a>
+		{% if perms.auth.view_user %}
+		<a
+			href="{% url 'users' %}"
+			class="flex items-center py-3 px-4 rounded-lg hover:bg-gray-700 transition-colors text-gray-300 hover:text-white {% if '/users/' in request.path %} bg-blue-600 {% endif %}">
+			<svg
+				class="w-5 h-5 mr-3"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+				aria-hidden="true">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+			</svg>
+			Users
+		</a>
+		{% endif %}
+
+		<a
+			href="{% url 'categories' %}"
+			class="flex items-center py-3 px-4 rounded-lg hover:bg-gray-700 transition-colors text-gray-300 hover:text-white {% if '/categories/' in request.path %} bg-blue-600 {% endif %}">
+			<svg
+				class="w-5 h-5 mr-3"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+				aria-hidden="true">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+			</svg>
+			Categories
+		</a>
+		<a
+			href="{% url 'posts' %}"
+			class="flex items-center py-3 px-4 rounded-lg hover:bg-gray-700 transition-colors text-gray-300 hover:text-white {% if '/posts/' in request.path %} bg-blue-600 {% endif %}">
+			<svg
+				class="w-5 h-5 mr-3"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+				aria-hidden="true">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+			</svg>
+			Posts
+		</a>
+	</nav>
+
+	<!-- Logout at Bottom -->
+	<div class="p-4 border-t border-gray-700">
+		<a
+			href="{% url 'logout' %}"
+			class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-600 transition-colors text-gray-300 hover:text-white">
+			<svg
+				class="w-5 h-5 mr-3"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+				aria-hidden="true">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+			</svg>
+			Logout
+		</a>
+	</div>
+</aside>

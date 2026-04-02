@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from .models import BlogPost
-from .models import Category
+from .models import Category, Comment
 from django.db.models import Q
-from blogs.forms import BlogPostForm
+
 
 # Create your views here.
 
@@ -12,15 +12,11 @@ def post_by_category(request, pk):
     # fetch the posts that belongs to the category with id=pk
     posts = BlogPost.objects.filter(
         category_id=pk, status='published')
-    # Use try/except when we want to perform some action
-    try:
-        category = get_object_or_404(Category, id=pk)
-    except:
-        # redirect the user to the home page
-        return redirect("home")
-    # Use get_object_or_404 when you want to show 404 error page if the category does not exist
-    # category = get_object_or_404(Category, id=pk)
-    # categories data can be added here if needed in the template
+    # try:
+    #     category = get_object_or_404(Category, pk=pk)
+    # except:
+    #     return redirect('home')
+    category = get_object_or_404(Category, pk=pk)
 
     context = {
         'posts': posts,
@@ -31,7 +27,20 @@ def post_by_category(request, pk):
 
 def blogs(request, slug):
     single_blog = get_object_or_404(BlogPost, slug=slug, status="published")
-    context = {"single_blog": single_blog}
+    if request.method == 'POST':
+        comment = Comment()
+        comment.user = request.user
+        comment.blog = single_blog
+        comment.comment = request.POST['comment']
+        comment.save()
+        return HttpResponseRedirect(request.path_info)
+    comments = Comment.objects.filter(blog=single_blog)
+    comment_count = comments.count()
+    context = {
+        "single_blog": single_blog,
+        'comments': comments,
+        'comment_count': comment_count,
+    }
     return render(request, 'blogs.html', context)
 
 
@@ -43,15 +52,5 @@ def search(request):
     return render(request, 'search.html', context)
 
 
-def create_post(request):
-    form = BlogPostForm()
-
-    if request.method == "POST":
-        form = BlogPostForm(request.POST, request.FILES)
-
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-
-    return render(request, "blogs/create_post.html", {"form": form})
+def landing_page(request):
+    return render(request, 'landing_page.html')

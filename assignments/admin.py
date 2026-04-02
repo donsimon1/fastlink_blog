@@ -13,6 +13,8 @@ class AboutAdmin(admin.ModelAdmin):
         else:
             return False
 
+class SocialLinkAdmin(admin.ModelAdmin):
+    list_display = ('platform', 'link', 'updated_at')
 
 admin.site.register(About, AboutAdmin)
-admin.site.register(SocialLink)
+admin.site.register(SocialLink, SocialLinkAdmin)

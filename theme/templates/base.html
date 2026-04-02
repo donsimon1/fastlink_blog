@@ -1,5 +1,5 @@
 {% load static tailwind_tags %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<title>FASTLINK ICT BLOG</title>
@@ -7,77 +7,187 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		{% tailwind_css %}
-		<link rel="stylesheet" href="{% static 'css/blog.css' %}" />
 	</head>
 
-	<body class="font-jaka text-base bg-gray-100">
-		<header class="py-2 border-b-2 border-blue-600 mb-8 rounded-lg px-8">
-      <div class="flex flex-nowrap justify-between items-center">
-        <div class="pt-1">
-          <a class="blog-header-logo no-underline font-bold text-blue-700" href="/"
-            >FastLink Blog</a
-          >
-        </div>
-        <!-- Search Section -->
-        <div class="bg-white rounded-lg">
-          
-          <form action="blog_main" method="GET" class="flex">
-            <input
-              type="text"
-              name="keyword"
-              value="{{ keyword }}"
-              placeholder="Enter search term ..."
-              class="flex-1 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            <button
-              class="bg-blue-600 text-white text-sm px-6 py-2 rounded hover:bg-blue-700 transition">
-              Go!
-            </button>
-          </form>
-        </div>
-        <div class="flex justify-end items-center gap-2">
-          <a
-            class="px-4 py-2 bg-blue-500 text-white text-sm rounded hover:bg-blue-600"
-            href="{% url 'register' %}"
-            >Login</a
-          >
-          <a
-            class="px-4 py-2 border border-gray-400 text-gray-700 text-sm rounded hover:bg-gray-100"
-            href="{% url 'register' %}"
-            >Register</a
-          >
-        </div>
-      </div>
-	</header>
+	<body class="font-jaka text-base bg-gray-50">
+		<!-- Header -->
+		<header class="bg-white shadow-md sticky top-0 z-50">
+			<div class="px-4 md:px-8 lg:px-12 py-4">
+				<div class="flex flex-wrap justify-between items-center gap-4">
+					<!-- Logo -->
+					<div class="shrink-0">
+						<a
+							class="flex items-center no-underline group"
+							href="/">
+							<div class="flex items-center space-x-2">
+								<svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+								</svg>
+								<span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+									FastLink
+								</span>
+								<span class="text-2xl font-light text-gray-700">Blog</span>
+							</div>
+						</a>
+					</div>
 
+					<!-- Search Section -->
+					<div class="grow md:grow-0 w-full md:w-auto md:max-w-md lg:max-w-lg">
+						<form action="{% url 'search' %}" method="GET" class="relative">
+							<div class="flex items-center bg-gray-100 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-500 focus-within:bg-white transition-all">
+								<svg class="w-5 h-5 text-gray-400 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+								</svg>
+								<input
+									type="text"
+									name="keyword"
+									value="{{ keyword }}"
+									placeholder="Search articles..."
+									class="flex-1 px-4 py-3 bg-transparent border-none focus:outline-none text-gray-700 placeholder-gray-400" />
+								<button
+									type="submit"
+									class="bg-blue-600 text-white px-6 py-3 hover:bg-blue-700 transition-colors font-medium">
+									Search
+								</button>
+							</div>
+						</form>
+					</div>
 
-<div class="container mx-auto px-8 md:px-12 font-jaka">
-	<!-- Header -->
-	
-	<!-- Navigation -->
-	<div class="py-1 mb-16"> 
-		<nav class="flex justify-between overflow-x-auto">
-			{% for category in categories %}
-			<h4>
-				<a class="p-2 text-gray-600 hover:text-gray-900 whitespace-nowrap" href="{% url 'post_by_category' category.id %}"
-					>{{ category.category_name }}
-				</a>
-			</h4> 
-			{% endfor %}
-		</nav>
-	</div>
+					<!-- Auth Links -->
+					<div class="flex items-center gap-3 w-full md:w-auto">
+						{% if not user.is_authenticated %}
+						<a
+							class="flex items-center justify-center px-5 py-2.5 text-blue-600 font-semibold text-sm rounded-lg hover:bg-blue-50 transition-colors w-full md:w-auto border border-blue-600"
+							href="{% url 'login' %}">
+							<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+							</svg>
+							Login
+						</a>
+						<a
+							class="flex items-center justify-center px-5 py-2.5 bg-blue-600 text-white font-semibold text-sm rounded-lg hover:bg-blue-700 transition-colors w-full md:w-auto shadow-md hover:shadow-lg"
+							href="{% url 'register' %}">
+							<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+							</svg>
+							Register
+						</a>
+						{% else %}
+						<a
+							class="flex items-center justify-center px-5 py-2.5 text-gray-700 font-semibold text-sm rounded-lg hover:bg-gray-100 transition-colors w-full md:w-auto border border-gray-300"
+							href="{% url 'dashboard' %}">
+							<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+							</svg>
+							Dashboard
+						</a>
+						<a
+							class="flex items-center justify-center px-5 py-2.5 bg-red-600 text-white font-semibold text-sm rounded-lg hover:bg-red-700 transition-colors w-full md:w-auto shadow-md hover:shadow-lg"
+							href="{% url 'logout' %}">
+							<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+							</svg>
+							Logout
+						</a>
+						{% endif %}
+					</div>
+				</div>
+			</div>
 
-		<div>
-      
-      {% block content %} 
-      {% endblock %}
-    </div>
+			<!-- Navigation -->
+			<div class="border-t border-gray-200 bg-white">
+				<div class="px-4 md:px-8 lg:px-12">
+					<nav class="flex flex-wrap md:flex-nowrap items-center gap-1 overflow-x-auto py-2">
+						{% for category in categories %}
+						<a
+							class="px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg whitespace-nowrap font-semibold text-sm md:text-base transition-all duration-200 relative group"
+							href="{% url 'post_by_category' category.id %}">
+							{{ category }}
+							<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+						</a>
+						{% endfor %}
+					</nav>
+				</div>
+			</div>
+		</header>
 
-    <!-- Footer -->
-		<footer class="bg-gray-200 text-center py-6 mt-8">
-			<p class="text-gray-600">
-				<span class="text-blue-600 font-bold">FASTLINK ICT BLOG</span> &copy; 2025. Developed by
-				<a href="#" class="text-blue-600 font-bold hover:underline">SIMON AI</a>
-			</p>
+		<!-- Content -->
+		<main class="px-4 md:px-8 lg:px-12 py-8">
+			<div class="max-w-7xl mx-auto">
+				{% block content %} {% endblock %}
+			</div>
+		</main>
+
+		<!-- Footer -->
+		<footer class="bg-gradient-to-r from-gray-800 to-gray-900 text-white mt-16">
+			<div class="px-4 md:px-8 lg:px-12 py-12">
+				<div class="max-w-7xl mx-auto">
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+						<!-- Brand Section -->
+						<div>
+							<div class="flex items-center space-x-2 mb-4">
+								<svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+								</svg>
+								<span class="text-2xl font-bold text-white">FastLink Blog</span>
+							</div>
+							<p class="text-gray-400 text-sm leading-relaxed">
+								Your trusted source for technology insights, trends, and innovations in the ICT industry.
+							</p>
+						</div>
+
+						<!-- Quick Links -->
+						<div>
+							<h3 class="text-lg font-semibold mb-4">Categories</h3>
+							<div class="space-y-2">
+								{% for category in categories|slice:":4" %}
+								<a href="{% url 'post_by_category' category.id %}" class="block text-gray-400 hover:text-blue-400 text-sm transition-colors">
+									{{ category }}
+								</a>
+								{% endfor %}
+							</div>
+						</div>
+
+						<!-- Contact Info -->
+						<div>
+							<h3 class="text-lg font-semibold mb-4">Stay Connected</h3>
+							<p class="text-gray-400 text-sm mb-4">
+								Subscribe to our newsletter for the latest updates and insights.
+							</p>
+							<div class="flex gap-3">
+								<a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+									<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+									</svg>
+								</a>
+								<a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+									<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+									</svg>
+								</a>
+								<a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+									<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+									</svg>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Bottom Bar -->
+					<div class="border-t border-gray-700 pt-8">
+						<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+							<p class="text-gray-400 text-sm text-center md:text-left">
+								<span class="font-bold text-white">FASTLINK ICT BLOG</span> &copy; 2025. All rights reserved.
+							</p>
+							<p class="text-gray-400 text-sm text-center md:text-right">
+								Developed by
+								<a href="#" class="text-blue-400 font-semibold hover:text-blue-300 transition-colors">SIMON AI</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</footer>
 	</body>
 </html>

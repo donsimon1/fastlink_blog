@@ -41,9 +41,17 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'blogs',
-    'assignments'
+    'assignments',
+    'widget_tweaks',
+    'crispy_forms',
+    "crispy_tailwind",
+
 
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+CRISPY_TEMPLATE_PACK = "tailwind"
 
 if DEBUG:
     # Add django_browser_reload only in DEBUG mode
@@ -71,13 +79,16 @@ ROOT_URLCONF = 'blog_main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 👇 Add your custom processors
+                'blogs.context_processor.get_categories',
+                'blogs.context_processor.get_social_links',
             ],
         },
     },
@@ -137,9 +148,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
+STATIC_ROOT = BASE_DIR / 'static'
+
+STATICFILES_DIRS = [
+    'blog_main/static',
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '/media')
@@ -148,3 +161,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '/media')
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Admin Dashboard",
+    "site_header": "Admin Dashboard"
+}

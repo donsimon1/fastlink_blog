@@ -1,11 +1,84 @@
-{% extends "base.html" %}
+{% extends "./dashboard/loginlayout.html" %}
+{% load widget_tweaks %}
 
 {% block content %}
-<h3 class="text-center text-3xl font-bold">Register</h3>
-<form action="" method="POST">
-  {% csrf_token %}
-  {{ form }}
-  <button class="px-4 py-2 bg-blue-600 text-white font-bold" type="submit">Submit</button>
-</form> 
+<div class="max-w-3xl mx-auto mt-12">
 
+  <h1 class="text-2xl font-bold text-blue-600 text-center mb-3">
+    Create Account
+  </h1>
+
+  <form method="POST" class="bg-white p-8 rounded-lg shadow grid grid-cols-1 md:grid-cols-2 gap-4">
+    {% csrf_token %}
+
+    <!-- Non-field errors -->
+    {% if form.non_field_errors %}
+      <div class="col-span-1 md:col-span-2 bg-red-100 text-red-600 p-3 rounded text-sm">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+
+    <!-- Email -->
+    <div>
+      {{ form.email.label_tag }}
+      {{ form.email|add_class:"w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"|attr:"placeholder:Enter your email" }}
+      {% if form.email.errors %}
+        <small class="text-red-500 text-sm">
+          {{ form.email.errors }}
+        </small>
+      {% endif %}
+    </div>
+
+    <!-- Username -->
+    <div>
+      {{ form.username.label_tag }}
+      {{ form.username|add_class:"w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"|attr:"placeholder:Choose username" }}
+      {% if form.username.errors %}
+        <small class="text-red-500 text-sm">
+          {{ form.username.errors }}
+        </small>
+      {% endif %}
+    </div>
+
+    <!-- Password -->
+    <div>
+      {{ form.password1.label_tag }}
+      {{ form.password1|add_class:"w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"|attr:"placeholder:Enter password" }}
+      {% if form.password1.errors %}
+        <small class="text-red-500 text-sm">
+          {{ form.password1.errors }}
+        </small>
+      {% endif %}
+    </div>
+
+    <!-- Confirm Password -->
+    <div>
+      {{ form.password2.label_tag }}
+      {{ form.password2|add_class:"w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"|attr:"placeholder:Confirm password" }}
+      {% if form.password2.errors %}
+        <small class="text-red-500 text-sm">
+          {{ form.password2.errors }}
+        </small>
+      {% endif %}
+    </div>
+
+    <!-- Submit Button (Full Width Across Both Columns) -->
+    <div class="col-span-1 md:col-span-2">
+      <button type="submit"
+        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition">
+        Register
+      </button>
+    </div>
+
+  </form>
+
+  <!-- Login Link -->
+  <p class="text-center text-sm text-gray-600 mt-4">
+    Already have an account?
+    <a href="{% url 'login' %}" class="text-blue-600 font-semibold hover:underline">
+      Login
+    </a>
+  </p>
+
+</div>
 {% endblock %}

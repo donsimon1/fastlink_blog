@@ -1,0 +1,24 @@
+{% load static tailwind_tags %}
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>FASTLINK ICT BLOG</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		{% tailwind_css %}
+    <link rel="stylesheet" href="/richtexteditor/rte_theme_default.css" />  
+    <script type="text/javascript" src="/richtexteditor/rte.js"></script>  
+    <script type="text/javascript" src='/richtexteditor/plugins/all_plugins.js'></script>
+      </head>
+
+	<body class="font-jaka text-base bg-gray-200">
+		<!-- Content -->
+		<main class="px-4 md:px-8 lg:px-12 py-8">
+			<div class="max-w-7xl mx-auto">
+				{% block content %} {% endblock %}
+			</div>
+		</main>
+    
+	</body>
+</html>

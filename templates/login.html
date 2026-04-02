@@ -1,0 +1,74 @@
+{% extends "./dashboard/loginlayout.html" %} 
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="max-w-md mx-auto mt-16">
+  
+  <h1 class="text-2xl font-bold text-blue-600 text-center mb-3">
+    Login
+  </h1>
+
+  <form method="POST" class="bg-white p-8 rounded-lg shadow space-y-4">
+    {% csrf_token %}
+
+    <!-- Non-field errors -->
+    {% if form.non_field_errors %}
+      <div class="bg-red-100 text-red-600 p-3 rounded text-sm">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+
+    <!-- Username -->
+    <div>
+      {{ form.username.label_tag }}
+      {{ form.username|add_class:"w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+      {% if form.username.errors %}
+        <small class="text-red-500 text-sm">
+          {{ form.username.errors }}
+        </small>
+      {% endif %}
+    </div>
+
+    <!-- Password -->
+    <div>
+      {{ form.password.label_tag }}
+      {{ form.password|add_class:"w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+      {% if form.password.errors %}
+        <small class="text-red-500 text-sm">
+          {{ form.password.errors }}
+        </small>
+      {% endif %}
+    </div>
+
+    <!-- Remember + Forgot -->
+    <div class="flex items-center justify-between text-sm">
+      <label class="flex items-center text-gray-600">
+        <input type="checkbox" class="mr-2">
+        Remember me
+      </label>
+
+      <a href="#" class="text-blue-600 hover:underline">
+        Forgot password?
+      </a>
+    </div>
+
+    <!-- Submit -->
+    <div>
+      <button type="submit"
+        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition">
+        Login
+      </button>
+    </div>
+
+  </form>
+
+  <!-- Register Link -->
+  <p class="text-center text-sm text-gray-600 mt-4">
+    Don’t have an account?
+    <a href="{% url 'register' %}" class="text-blue-600 font-semibold hover:underline">
+      Sign up
+    </a>
+  </p>
+
+</div>
+{% endblock %}

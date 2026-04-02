@@ -4,6 +4,7 @@ from assignments.models import SocialLink
 
 def get_categories(request):
     categories = Category.objects.all()
+    print(categories)
     return dict(categories=categories)
 
 

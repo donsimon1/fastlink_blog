@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto mt-10">
+  <h1 class="text-2xl font-bold text-blue-600 text-center mb-3">Register Student</h1>
+
+  <form method="POST" class="bg-white p-8 rounded-lg shadow grid grid-cols-1 md:grid-cols-2 gap-4">
+    {% csrf_token %}
+
+    <div>
+      {{ form.student_number.label_tag }}
+      {{ form.student_number|add_class:"w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+      {% if form.student_number.errors %}
+        <small class="text-red-500 text-sm mt-1">
+          {{ form.student_number.errors }}
+        </small>
+      {% endif %}
+    </div>
+
+    <div>
+      {{ form.first_name.label_tag }}
+      {{ form.first_name|add_class:"w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+      {% if form.first_name.errors %}
+        <small class="text-red-500 text-sm mt-1">
+          {{ form.first_name.errors }}
+        </small>
+      {% endif %}
+    </div>
+
+    <div>
+      {{ form.last_name.label_tag }}
+      {{ form.last_name|add_class:"w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+      {% if form.last_name.errors %}
+        <small class="text-red-500 text-sm mt-1">
+          {{ form.last_name.errors }}
+        </small>
+      {% endif %}
+    </div>
+
+    <div>
+      {{ form.email.label_tag }}
+      {{ form.email|add_class:"w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+      {% if form.email.errors %}
+        <small class="text-red-500 text-sm mt-1">
+          {{ form.email.errors }}
+        </small>
+      {% endif %}
+    </div>
+
+    <div>
+      {{ form.field_of_study.label_tag }}
+      {{ form.field_of_study|add_class:"w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+      {% if form.field_of_study.errors %}
+        <small class="text-red-500 text-sm mt-1">
+          {{ form.field_of_study.errors }}
+        </small>
+      {% endif %}
+    </div>
+
+    <div>
+      {{ form.gpa.label_tag }}
+      {{ form.gpa|add_class:"w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+      {% if form.gpa.errors %}
+        <small class="text-red-500 text-sm mt-1">
+          {{ form.gpa.errors }}
+        </small>
+      {% endif %}
+    </div>
+
+   <!-- Full-width button -->
+    <div class="col-span-1 md:col-span-2">
+      <button type="submit"
+        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition">
+        Register Student
+      </button>
+    </div>
+
+  </form>
+</div>
+{% endblock %}

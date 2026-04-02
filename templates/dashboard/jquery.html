@@ -1,0 +1,34 @@
+{% load static %} {% load static tailwind_tags %}
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>FASTLINK ICT BLOG</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		{% tailwind_css %}
+	</head>
+
+	<body class="font-jaka text-base">
+		<div class="max-w-2xl mx-auto">
+			<h1 class="font-bold text-2xl text-center">Jquery</h1>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat enim
+				laboriosam nesciunt quos! Dolor nesciunt accusantium sint facilis ut, natus
+				eum inventore aperiam omnis blanditiis labore hic molestiae consequatur
+				perferendis.
+			</p>
+			<button class="hide px-6 py-2 bg-blue-600 text-white font-bold">
+				Hide Paragraph
+			</button>
+			<button class="show px-6 py-2 bg-blue-600 text-white font-bold">
+				show Paragraph
+			</button>
+		</div>
+
+		<script src="{% static 'js/jquery.js'  %}"></script>
+		<script src="{% static 'js/query.js' %}"></script>
+
+		
+	</body>
+</html>
