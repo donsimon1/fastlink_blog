@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="/richtexteditor/rte_theme_default.css" />  
     <script type="text/javascript" src="/richtexteditor/rte.js"></script>  
     <script type="text/javascript" src='/richtexteditor/plugins/all_plugins.js'></script>
-      </head>
+    <script src="{% static 'js/sweetalert2@11.js' %}"></script>
+  </head>
 
 	<body class="font-jaka text-base bg-gray-200">
 		<!-- Content -->
@@ -19,6 +20,7 @@
 				{% block content %} {% endblock %}
 			</div>
 		</main>
-    
+    {% load sweetify %}
+    {% sweetify %}
 	</body>
 </html>

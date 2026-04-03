@@ -1,3 +1,4 @@
+import sweetify
 from django.shortcuts import redirect, render
 from blogs.models import Category
 from blogs.models import BlogPost
@@ -44,23 +45,54 @@ def register(request):
 
 
 def login(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
+    form = AuthenticationForm(request, data=request.POST or None)
 
-            user = auth.authenticate(username=username, password=password)
-            if user is not None:
-                auth.login(request, user)
+    if request.method == 'POST':
+        if form.is_valid():
+            user = form.get_user()  # ✅ cleaner than manual authenticate
+
+            auth.login(request, user)
+
+            # ✅ Success SweetAlert (modal style)
+            sweetify.toast(
+                request,
+                "You are logged in successfully",
+                icon="success",
+                position="top-end",   # 👈 top-right
+                timer=2500,           # disappears quickly
+                width="400px",        # small size
+                showConfirmButton=False
+            )
+
             return redirect('dashboard')
-    form = AuthenticationForm()
-    context = {
-        'form': form
-    }
-    return render(request, 'login.html', context)
+
+        else:
+            # ❌ Error SweetAlert
+            sweetify.toast(
+                request,
+                "Invalid username or password",
+                icon="error",
+                position="top-end",   # 👈 top-right
+                timer=2500,           # disappears quickly
+                width="400px",        # small size
+                showConfirmButton=False
+            )
+
+            return redirect('login')  # important for messages to show
+
+    return render(request, 'login.html', {'form': form})
 
 
 def logout(request):
     auth.logout(request)
+
+    # ✅ Small top-right toast
+    sweetify.toast(
+        request,
+        "You have been logged out 👋",
+        icon="success",
+        position="top-end",
+        timer=2500,
+        showConfirmButton=False
+    )
     return redirect('login')

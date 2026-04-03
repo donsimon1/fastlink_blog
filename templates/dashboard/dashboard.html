@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     {% tailwind_css %}
+    <script src="{% static 'js/sweetalert2@11.js' %}"></script>
   </head>
   <body class="font-jaka text-base bg-gray-50">
     <div class="min-h-screen flex">
@@ -247,5 +248,7 @@
         });
       })();
     </script>
+    {% load sweetify %}
+    {% sweetify %}
   </body>
 </html>

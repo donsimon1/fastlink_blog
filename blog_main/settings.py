@@ -45,10 +45,10 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'crispy_forms',
     "crispy_tailwind",
-
-
+    'sweetify',
 ]
-
+# possible options: 'sweetalert', 'sweetalert2' - default is 'sweetalert2'
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
 CRISPY_TEMPLATE_PACK = "tailwind"

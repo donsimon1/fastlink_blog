@@ -30,7 +30,8 @@ def add_category(request):
         if form.is_valid():
             form.save()
             return redirect('categories')
-    form = CategorytForm()
+    else:
+      form = CategorytForm()
     context = {
         'form': form,
     }
@@ -45,7 +46,8 @@ def edit_category(request, pk):
         if form.is_valid():
             form.save()
             return redirect('categories')
-    form = CategorytForm(instance=category)
+    else:
+      form = CategorytForm(instance=category)
 
     context = {
         'form': form,
